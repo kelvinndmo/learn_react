@@ -6,6 +6,10 @@ var countIncrement = function countIncrement() {
     count++;
     runTheApplication();
 };
+var countDecrement = function countDecrement() {
+    count--;
+    runTheApplication();
+};
 
 var approute = document.getElementById('areba');
 
@@ -23,6 +27,11 @@ var runTheApplication = function runTheApplication() {
             'button',
             { onClick: countIncrement },
             'Kelvin Onkundi Ndemo'
+        ),
+        React.createElement(
+            'button',
+            { onClick: countDecrement },
+            '-1'
         )
     );
     ReactDOM.render(template, approute);
