@@ -1,61 +1,43 @@
-console.log("app.js is running");
+console.log('app is running')
+
+const app = {
+    "name":"kelvin onkundi ndemo",
+    "title":"Look for me",
+    "subtitle":"Yes its him",
+    "options":[]
+}
+
+const formSubmit = (e) => {
+    e.preventDefault(); //prevents page from exhibiting default loading behaviour
+    const option = e.target.elements.option.value; //gets the value of the option we input
+
+    if(option){
+        app.options.push(option);
+        e.target.elements.option.value = ''; //reset the input field to blank
+        console.log(app.options) //this is optional
+
+    }
+
+
+}
 
 const template = (
-<div>
-<h1>This is JSX from app.js hello</h1> 
-<p>This is some info</p>
-<ol>
-    <li>Kelvin</li>
-    <li>Item two</li>
-</ol>
-</div>
+    <div>
+        <h1>{app.title}</h1>
+        {app.subtitle && <p>{app.subtitle}</p>}
+        <p>{app.options.length > 0? "Here are your options":"No options"}</p>
+        <p>{app.options.length}</p>
+        <ol>
+            <li>Item One</li>
+            <li>Item Two</li>
+        </ol>
+        <form onSubmit= {formSubmit}>
+            <input type="text" name='option'/>
+            <button>Add Option</button>
+        </form>
+    </div>
 );
 
-// var userName = 'onkundi';
-// var UserAge = 21;
-// var location = "Kisii"
+const approute = document.getElementById('areba');
+ReactDOM.render(template,areba)
 
-const juja = {
-    "title":"I wondered lonely",
-    "subtitle":"English",
-    "options":["One","Two"]
-
-}
-
-const template2 = (
-    <div>
-        <h1>{juja.title}</h1>
-        {juja.subtitle && <p>subtitle : {juja.subtitle}</p>}
-      {juja.options.length > 0 ? <p> onkindi ndemo  </p> :"no options"}
-      
-    </div>
-)
-
-const ndemo = {
-    "name":"",
-    "school":"JKUAT",
-    "age":50,
-    "company":"andela",
-    "location":"Keroka  "
-}
-
-function getLocation(location){
-    if(location){
-        return <p>{location}</p>
-    }
-}
-
-const andela = (
-    <div>
-        <h1>{ndemo.name ? ndemo.name:"Onkundi"}</h1>
-        <h2>{ndemo.school}</h2>
-        <h3>{ndemo.company}</h3>
-        {( ndemo.age && ndemo.age >= 18) && <p> Age:{ndemo.age}</p>}
-        {getLocation(ndemo.location)}
-    </div>
-)
-
-const approute = document.getElementById('areba')
-
-
-ReactDOM.render(template2,approute)

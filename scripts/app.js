@@ -1,33 +1,73 @@
 "use strict";
 
-var add = function add(a, b) {
-    console.log(arguments);
-    return a + b;
+console.log('app is running');
+
+var app = {
+    "name": "kelvin onkundi ndemo",
+    "title": "Look for me",
+    "subtitle": "Yes its him",
+    "options": []
 };
 
-console.log(add(54, 60));
+var formSubmit = function formSubmit(e) {
+    e.preventDefault(); //prevents page from exhibiting default loading behaviour
+    var option = e.target.elements.option.value; //gets the value of the option we input
 
-var user = {
-    "name": "onkundi",
-    "cities": ["nairobi", "New York", "Dublin"],
-    printPlacesLived: function printPlacesLived() {
-        var _this = this;
-
-        return this.cities.map(function (city) {
-            return _this.name + "has lived in " + city;
-        });
+    if (option) {
+        app.options.push(option);
+        e.target.elements.option.value = ''; //reset the input field to blank
+        console.log(app.options); //this is optional
     }
 };
 
-var multplier = {
-    numbers: [1, 45, 6, 65, 4],
-    multiplyBy: 2,
-    multply: function multply() {
-        var _this2 = this;
+var template = React.createElement(
+    "div",
+    null,
+    React.createElement(
+        "h1",
+        null,
+        app.title
+    ),
+    app.subtitle && React.createElement(
+        "p",
+        null,
+        app.subtitle
+    ),
+    React.createElement(
+        "p",
+        null,
+        app.options.length > 0 ? "Here are your options" : "No options"
+    ),
+    React.createElement(
+        "p",
+        null,
+        app.options.length
+    ),
+    React.createElement(
+        "ol",
+        null,
+        React.createElement(
+            "li",
+            null,
+            "Item One"
+        ),
+        React.createElement(
+            "li",
+            null,
+            "Item Two"
+        )
+    ),
+    React.createElement(
+        "form",
+        { onSubmit: formSubmit },
+        React.createElement("input", { type: "text", name: "option" }),
+        React.createElement(
+            "button",
+            null,
+            "Add Option"
+        )
+    )
+);
 
-        return this.numbers.map(function (number) {
-            return number * _this2.multiplyBy;
-        });
-    }
-};
-console.log(multplier.multply());
+var approute = document.getElementById('areba');
+ReactDOM.render(template, areba);
