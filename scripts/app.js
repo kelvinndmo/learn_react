@@ -1,33 +1,31 @@
-"use strict";
+'use strict';
 
-var add = function add(a, b) {
-    console.log(arguments);
-    return a + b;
+var count = 0;
+
+var countIncrement = function countIncrement() {
+    count++;
+    runTheApplication();
 };
 
-console.log(add(54, 60));
+var approute = document.getElementById('areba');
 
-var user = {
-    "name": "onkundi",
-    "cities": ["nairobi", "New York", "Dublin"],
-    printPlacesLived: function printPlacesLived() {
-        var _this = this;
-
-        return this.cities.map(function (city) {
-            return _this.name + "has lived in " + city;
-        });
-    }
+var runTheApplication = function runTheApplication() {
+    var template = React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
+            null,
+            'Count : ',
+            count
+        ),
+        React.createElement(
+            'button',
+            { onClick: countIncrement },
+            'Kelvin Onkundi Ndemo'
+        )
+    );
+    ReactDOM.render(template, approute);
 };
 
-var multplier = {
-    numbers: [1, 45, 6, 65, 4],
-    multiplyBy: 2,
-    multply: function multply() {
-        var _this2 = this;
-
-        return this.numbers.map(function (number) {
-            return number * _this2.multiplyBy;
-        });
-    }
-};
-console.log(multplier.multply());
+runTheApplication();
