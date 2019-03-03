@@ -17,57 +17,73 @@ var formSubmit = function formSubmit(e) {
         app.options.push(option);
         e.target.elements.option.value = ''; //reset the input field to blank
         console.log(app.options); //this is optional
+        runApp();
+    }
+};
+var approute = document.getElementById('areba');
+
+var removeAll = function removeAll() {
+    if (app.options.length > 0) {
+        app.options = [];
+        runApp();
     }
 };
 
-var template = React.createElement(
-    "div",
-    null,
-    React.createElement(
-        "h1",
-        null,
-        app.title
-    ),
-    app.subtitle && React.createElement(
-        "p",
-        null,
-        app.subtitle
-    ),
-    React.createElement(
-        "p",
-        null,
-        app.options.length > 0 ? "Here are your options" : "No options"
-    ),
-    React.createElement(
-        "p",
-        null,
-        app.options.length
-    ),
-    React.createElement(
-        "ol",
+var runApp = function runApp() {
+    var template = React.createElement(
+        "div",
         null,
         React.createElement(
-            "li",
+            "h1",
             null,
-            "Item One"
+            app.title
+        ),
+        app.subtitle && React.createElement(
+            "p",
+            null,
+            app.subtitle
         ),
         React.createElement(
-            "li",
+            "p",
             null,
-            "Item Two"
-        )
-    ),
-    React.createElement(
-        "form",
-        { onSubmit: formSubmit },
-        React.createElement("input", { type: "text", name: "option" }),
+            app.options.length > 0 ? "Here are your options" : "No options"
+        ),
         React.createElement(
             "button",
+            { onClick: removeAll },
+            "Remove all"
+        ),
+        React.createElement(
+            "p",
             null,
-            "Add Option"
+            app.options.length
+        ),
+        React.createElement(
+            "ol",
+            null,
+            React.createElement(
+                "li",
+                null,
+                "Item One"
+            ),
+            React.createElement(
+                "li",
+                null,
+                "Item Two"
+            )
+        ),
+        React.createElement(
+            "form",
+            { onSubmit: formSubmit },
+            React.createElement("input", { type: "text", name: "option" }),
+            React.createElement(
+                "button",
+                null,
+                "Add Option"
+            )
         )
-    )
-);
+    );
+    ReactDOM.render(template, areba);
+};
 
-var approute = document.getElementById('areba');
-ReactDOM.render(template, areba);
+runApp();
