@@ -1,35 +1,27 @@
 "use strict";
 
-console.log('app is running');
-
 var app = {
-    "name": "kelvin onkundi ndemo",
-    "title": "Look for me",
-    "subtitle": "Yes its him",
+    "title": "norah Novak",
+    "subtitle": "kelvin onkundi",
     "options": []
 };
 
-var formSubmit = function formSubmit(e) {
-    e.preventDefault(); //prevents page from exhibiting default loading behaviour
-    var option = e.target.elements.option.value; //gets the value of the option we input
-
+var submitForm = function submitForm(e) {
+    e.preventDefault(); //prevents the default behaviour
+    var option = e.target.elements.option.value;
     if (option) {
         app.options.push(option);
-        e.target.elements.option.value = ''; //reset the input field to blank
-        console.log(app.options); //this is optional
-        runApp();
+        e.target.elements.option.value = ''; //sets to an empty string 
     }
-};
-var approute = document.getElementById('areba');
-
-var removeAll = function removeAll() {
-    if (app.options.length > 0) {
-        app.options = [];
-        runApp();
-    }
+    renderApp();
 };
 
-var runApp = function runApp() {
+var clearArray = function clearArray() {
+    app.options = [];
+    renderApp();
+};
+
+var renderApp = function renderApp() {
     var template = React.createElement(
         "div",
         null,
@@ -46,12 +38,7 @@ var runApp = function runApp() {
         React.createElement(
             "p",
             null,
-            app.options.length > 0 ? "Here are your options" : "No options"
-        ),
-        React.createElement(
-            "button",
-            { onClick: removeAll },
-            "Remove all"
+            app.options.length > 0 ? "here are your option" : "no options"
         ),
         React.createElement(
             "p",
@@ -64,26 +51,31 @@ var runApp = function runApp() {
             React.createElement(
                 "li",
                 null,
-                "Item One"
+                "kelvin onkundi"
             ),
             React.createElement(
                 "li",
                 null,
-                "Item Two"
+                "norah areba"
             )
         ),
         React.createElement(
             "form",
-            { onSubmit: formSubmit },
+            { onSubmit: submitForm },
             React.createElement("input", { type: "text", name: "option" }),
             React.createElement(
                 "button",
                 null,
-                "Add Option"
+                " add option "
+            ),
+            React.createElement(
+                "button",
+                { onClick: clearArray },
+                "clearall"
             )
         )
     );
-    ReactDOM.render(template, areba);
+    ReactDOM.render(template, document.getElementById('ndemo'));
 };
 
-runApp();
+renderApp();
