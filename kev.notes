@@ -1,0 +1,5 @@
+states:
+- setup default state object
+- Component is rendered with default state values
+- state changes based off some event
+- Application renders itself.
