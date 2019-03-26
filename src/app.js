@@ -1,57 +1,93 @@
-console.log('app is running')
-
-const app = {
-    "name":"kelvin onkundi ndemo",
-    "title":"Look for me",
-    "subtitle":"Yes its him",
-    "options":[]
+class IndecisionApp extends React.Component{
+    render(){
+        const title = "Indecision App"
+        const subtitle = "Put your life in the hands of a computer"
+        const options = ['Thing one','Thing Two','Thing three']
+        return (
+            <div>
+                <Header title={title} subtitle={subtitle}/>
+                <Action  />
+                <Options  options={options}/>
+                <AddOption />
+            </div>
+        )
+    }
+}
+class Header extends React.Component{
+    render(){
+        return (
+            <div>
+                <h1>{this.props.title}</h1>
+                <h2>{this.props.subtitle}</h2>
+            </div>
+        )
+    }
 }
 
-const formSubmit = (e) => {
-    e.preventDefault(); //prevents page from exhibiting default loading behaviour
-    const option = e.target.elements.option.value; //gets the value of the option we input
-
-    if(option){
-        app.options.push(option);
-        e.target.elements.option.value = ''; //reset the input field to blank
-        console.log(app.options) //this is optional
-        runApp()
-
+class Action extends React.Component{
+    handlePick(){
+        alert('hey')
     }
-
-
+   
+    render(){
+        return (
+            <div>
+                <button onClick={this.handlePick}>what should i do?</button>
+                <button onClick={this.removeAll}>hellloe</button>
+            </div>
+        )
+    }
 }
-const approute = document.getElementById('areba');
 
-const removeAll = () =>{
-    if(app.options.length > 0){
-        app.options = [];
-        runApp();
+class Options extends React.Component {
+    constructor(props){
+        super(props);
+        this.removeAll = this.removeAll.bind(this);
     }
-};
+    removeAll(){
+        alert("fuck ")
+        console.log(this.props.options)
+    }
+    render(){
 
-const runApp = () => {
-const template = (
+        return (
+            <div>
+                <ol>
+                    {
+                        this.props.options.map((option) => <li key={option}>{option}</li>)
+                    }
+                    <button onClick={this.removeAll}>Remove all</button>
+                </ol>
+            </div>
+        )
+    }
+}
+
+class AddOption extends React.Component{
+    handleSubmit(e){
+        e.preventDefault();
+        const kevo = e.target.elements.kevo.value.trim();
+        if (kevo){
+            alert(kevo)
+        }
+    }
+    render(){
+        return (
+          <form onSubmit={this.handleSubmit}>
+              <input type="text" name="kevo"></input>
+              <button > submit </button>
+          </form>
+        )
+    }
+}
+
+const jsx = (
     <div>
-        <h1>{app.title}</h1>
-        {app.subtitle && <p>{app.subtitle}</p>}
-        <p>{app.options.length > 0? "Here are your options":"No options"}</p>
-        <button onClick={removeAll}>Remove all</button>
-        <p>{app.options.length}</p>
-        <ol>
-            <li>Item One</li>
-            <li>Item Two</li>
-        </ol>
-        <form onSubmit= {formSubmit}>
-            <input type="text" name='option'/>
-            <button>Add Option</button>
-        </form>
+        <Header />
+        <Action />
+        < Options />
+        <AddOption />
     </div>
-);
-ReactDOM.render(template,areba)
-}
+)
 
-
-
-
-runApp()
+ReactDOM.render(<IndecisionApp/>, document.getElementById('areba'))
