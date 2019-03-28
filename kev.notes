@@ -3,3 +3,6 @@ states:
 - Component is rendered with default state values
 - state changes based off some event
 - Application renders itself.
+
+This.setstate:
+takes one function
