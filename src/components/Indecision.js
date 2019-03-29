@@ -2,10 +2,12 @@ import AddOption from './AddOption'
 import Options from './Options'
 import Header from './Header'
 import Action from './Action'
+import OptionModal from './OptionModal'
 
 export default class IndecisionApp extends React.Component{
     state = {
-        options:[]
+        options:[],
+        selectedOption:undefined
     }
     componentDidMount(){
         try {
@@ -38,7 +40,10 @@ export default class IndecisionApp extends React.Component{
     handlePickOne = () => {
             let kelvo = Math.floor(Math.random() * this.state.options.length);
             const option = this.state.options[kelvo]
-            alert (option)
+            this.setState(() => ({
+                selectedOption:option
+            }))
+        
     }
     handleAddOption = (option) => {
         if(!option){ 
@@ -60,6 +65,12 @@ export default class IndecisionApp extends React.Component{
             }
         ))
     }
+
+    clearSelectedOption = () => {
+        this.setState(() => ({
+            selectedOption:undefined
+        }))
+    }
     render(){
         const subtitle = "Put your life in the hands of a computer"
         return (
@@ -68,7 +79,8 @@ export default class IndecisionApp extends React.Component{
                 <Action handlePick={this.handlePickOne} hasOptions = {this.state.options.length > 0}/>
                 <Options handleDeleteOptions={this.handleDeleteOptions}  options={this.state.options} handleDeleteOption={this.handleDeleteOption}/>
                 <AddOption handleAddOption={this.handleAddOption} />
-            </div>
+                <OptionModal clearOption={this.clearSelectedOption} selectedOption={this.state.selectedOption}/>
+            </div> 
         )
     }
 }
